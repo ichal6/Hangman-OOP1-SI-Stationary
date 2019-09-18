@@ -3,6 +3,8 @@ import java.util.ArrayList;
 
 public class PLAY_GAME 
 {
+    static final int INDEX_OF_CAPITAL = 1;
+    static int lifeCount = 10;
     public static void main(String[] args) 
     {
         
@@ -16,17 +18,28 @@ public class PLAY_GAME
 
     public static void initGame()
     {
-        int lifeCount = 10;
+        lifeCount = 10;
         ArrayList<String> countryAndCapital = new ArrayList<String>();
-        int INDEX_OF_CAPITAL = 1;
+        
         Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
         countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file));
         char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
+        startGame(countryAndCapital, capitalDash);
+    }
+
+    public static void startGame(ArrayList<String> countryAndCapital ,char[] capitalDash)
+    {
+        boolean gameWin = true;
         while (lifeCount > 0)
         {
-            play_game(countryAndCapital.get(1),capitalDash);
+            play_game(countryAndCapital.get(INDEX_OF_CAPITAL),capitalDash);
+            if (gameWin)
+            {
+                //gameWinScreen();
+            }
             lifeCount -= 1;
         }
+        //gameLoseScreen();
     }
 
     public static boolean play_game(String capital, char[] dashedWord)
