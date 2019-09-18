@@ -17,20 +17,18 @@ public class FIND_LETTER
         }
     }
 
-    public static boolean checkLetterInText(String capital, char[] capitalDash, String letterOrWord)
+    public static char[] checkLetterInText(String capital, char[] capitalDash, String letterOrWord)
     {
         char[] capital_array = capital.toCharArray();
-        boolean letterIsWord = false;
         int index = 0;
         for (char charInCapital: capital_array)
         {
             if (charInCapital == letterOrWord.charAt(0))
             {
                 capitalDash[index] = letterOrWord.charAt(0);
-                letterIsWord = true;
             }
             index += 1;
         }
-        return letterIsWord;
+        return capitalDash;
     }
 }
