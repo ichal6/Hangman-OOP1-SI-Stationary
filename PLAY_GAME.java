@@ -39,6 +39,7 @@ public class PLAY_GAME
             {
                 long timeEnd = stopTime(timeBegin);
                 gameWinScreen(timeEnd, guessingCount);
+                break;
             }
             
         }
@@ -61,6 +62,15 @@ public class PLAY_GAME
         if (letterOrWord.length() > 2)
         {
             foundWord = FIND_LETTER.checkWordInText(capital, letterOrWord);
+            foundLetter = true;
+            if (!foundWord)
+            {
+                lifeCount -= 1;
+            }
+            else
+            {
+                return true;
+            }
         }
         else
         {
@@ -77,15 +87,8 @@ public class PLAY_GAME
             guessingCount += 1;
         }
 
-        if(foundWord)
-        {
-            return true;
-        }
-        else
-        {
-            lifeCount -= 1;
-            return false;
-        }
+        return false;
+
 
         //inputUser.close();
     }
