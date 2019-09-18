@@ -6,6 +6,8 @@ public class PLAY_GAME
     static final int INDEX_OF_COUNTRY = 0;
     static final int INDEX_OF_CAPITAL = 1;
     static int lifeCount = 10;
+    static long timeBegin;
+    static int guessingCount = 0; 
     static ArrayList<String> notInWord = new ArrayList<String>();
 
     public static void main(String[] args) 
@@ -28,17 +30,23 @@ public class PLAY_GAME
 
     public static void startGame(ArrayList<String> countryAndCapital ,char[] capitalDash)
     {
+        timeBegin = startTime();
         boolean gameWin = true;
         while (lifeCount > 0)
         {
-            play_game(countryAndCapital, capitalDash);
+            gameWin = play_game(countryAndCapital, capitalDash);
             if (gameWin)
             {
-                //gameWinScreen();
+                long timeEnd = stopTime(timeBegin);
+                gameWinScreen(timeEnd, guessingCount);
             }
             
         }
-        //gameLoseScreen();
+        if (!gameWin)
+        {
+            gameLoseScreen();
+        }
+        
     }
 
     public static boolean play_game(ArrayList<String> countryAndCapital, char[] dashedWord)
@@ -92,6 +100,18 @@ public class PLAY_GAME
         return true;
     }
 
+    public static long startTime()
+    {
+        long timeStart = System.nanoTime();
+        return timeStart;
+    }
+
+    public static long stopTime(long timeStart)
+    {
+        long timeTotal = (System.nanoTime() - timeStart)/1_000_000_000;
+        return timeTotal;
+    }
+
     public static void displayHint(ArrayList<String> arrayCapitalCountry)
     {
         System.out.print("It's the capital of: ");
@@ -111,5 +131,17 @@ public class PLAY_GAME
         {
             displayHint(arrayCapitalCountry);
         }
+    }
+
+
+    public static void gameWinScreen(long timeEnd, int guessingCount)
+    {
+        System.out.println("Congratulations! You Win! Your time is " + timeEnd 
+                            + " second and you guessed after " + guessingCount + " letters" );
+    }
+
+    public static void gameLoseScreen()
+    {
+        System.out.println("I\'m so sorry, but you died... Try in next life." );
     }
 }

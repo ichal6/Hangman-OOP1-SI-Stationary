@@ -36,16 +36,4 @@ public class HANGMAN
     }
 
 
-    public static long startTime()
-    {
-        long timeStart = System.nanoTime();
-        return timeStart;
-    }
-
-    public static long StopTime(long timeStart)
-    {
-        long timeTotal = (System.nanoTime() - timeStart)/1_000_000_000;
-        return timeTotal;
-    }
-
 }
