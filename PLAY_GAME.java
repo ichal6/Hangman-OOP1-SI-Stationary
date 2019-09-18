@@ -7,7 +7,7 @@ public class PLAY_GAME
     {
         
         String capital = "łobuz";
-        char[] dashed = PREPARE_TO_GAME.dashWord(capital);
+        char[] dashed = PREPARE_TO_GAME.makeDashWord(capital);
         play_game(capital, dashed);
         System.out.println(dashed);
         play_game(capital, dashed);

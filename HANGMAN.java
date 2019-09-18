@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 public class HANGMAN 
 {
     public static void main(String[] args) 
@@ -20,6 +21,7 @@ public class HANGMAN
         {
             case 'S':
                 System.out.println("Heya! Nacisnąłeś start!");
+                initGame();
                 break;
             case 'H':
                 break;
@@ -30,5 +32,21 @@ public class HANGMAN
                 mainMenu();
         }
         return 1;
+    }
+
+    public static void initGame()
+    {
+        ArrayList<String> countryAndCapital = new ArrayList<String>();
+        int INDEX_OF_CAPITAL = 1;
+        Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
+        countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file));
+        char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
+        System.out.println(capitalDash);
+        System.out.println(countryAndCapital);
+    }
+
+    public static void displayUser()
+    {
+        ;
     }
 }
