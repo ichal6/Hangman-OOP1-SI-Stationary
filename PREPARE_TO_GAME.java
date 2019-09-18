@@ -27,7 +27,7 @@ public class PREPARE_TO_GAME
         return arrayRow;
     }
 
-    public static String dashWord(String capital)
+    public static char[] dashWord(String capital)
     {
         int lengthWord = capital.length();
         int iter = 0;
@@ -37,6 +37,8 @@ public class PREPARE_TO_GAME
             capitalDash = capitalDash.concat("_");
             iter += 1;
         }
-        return capitalDash;
+        char[] capitalDashArray = capitalDash.toCharArray();
+
+        return capitalDashArray;
     }
 }
