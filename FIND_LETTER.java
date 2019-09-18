@@ -31,4 +31,17 @@ public class FIND_LETTER
         }
         return capitalDash;
     }
+
+    public static boolean checkLetterInText(String capital, String letterOrWord)
+    {
+        char[] capital_array = capital.toCharArray();
+        for (char charInCapital: capital_array)
+        {
+            if (charInCapital == letterOrWord.charAt(0))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

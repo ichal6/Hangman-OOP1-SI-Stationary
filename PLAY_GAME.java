@@ -33,7 +33,7 @@ public class PLAY_GAME
             {
                 //gameWinScreen();
             }
-            lifeCount -= 1;
+            
         }
         //gameLoseScreen();
     }
@@ -53,10 +53,17 @@ public class PLAY_GAME
         }
         else
         {
+            foundLetter = FIND_LETTER.checkLetterInText(capital, letterOrWord);
             dashedWord = FIND_LETTER.checkLetterInText(capital, dashedWord, letterOrWord);
             foundWord = hasWord(dashedWord);
         }
 
+
+        if(foundLetter == false)
+        {
+            lifeCount -= 1;
+        }
+        
         if(foundWord)
         {
             return true;
@@ -65,6 +72,7 @@ public class PLAY_GAME
         {
             return false;
         }
+
         //inputUser.close();
     }
 
