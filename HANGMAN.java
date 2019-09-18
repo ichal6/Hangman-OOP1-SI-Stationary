@@ -22,6 +22,7 @@ public class HANGMAN
             case 'S':
                 System.out.println("Heya! Nacisnąłeś start!");
                 PLAY_GAME.initGame();
+                mainMenu();
                 break;
             case 'H':
                 break;
