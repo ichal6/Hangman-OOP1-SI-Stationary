@@ -14,25 +14,59 @@ public class PLAY_GAME
         System.out.println(dashed);
     }
 
-    public static void play_game(String capital, char[] dashedWord)
+    public static void initGame()
+    {
+        int lifeCount = 10;
+        ArrayList<String> countryAndCapital = new ArrayList<String>();
+        int INDEX_OF_CAPITAL = 1;
+        Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
+        countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file));
+        char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
+        while (lifeCount > 0)
+        {
+            play_game(countryAndCapital.get(1),capitalDash);
+            lifeCount -= 1;
+        }
+    }
+
+    public static boolean play_game(String capital, char[] dashedWord)
     {
         boolean foundLetter = false;
         boolean foundWord = false;
-        System.out.println("Welcome to Hangman!");
         System.out.print("Please insert word or leter: ");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
         String letterOrWord = inputUser.nextLine();  // Read user input
         if (letterOrWord.length() > 2)
         {
             foundWord = FIND_LETTER.checkWordInText(capital, letterOrWord);
-            System.out.println(foundWord);
         }
         else
         {
-            foundLetter = FIND_LETTER.checkLetterInText(capital, dashedWord, letterOrWord);
-            System.out.println(foundLetter);
+            dashedWord = FIND_LETTER.checkLetterInText(capital, dashedWord, letterOrWord);
+            foundWord = hasWord(dashedWord);
+        }
+
+        if(foundWord)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
         //inputUser.close();
+    }
+
+    public static boolean hasWord(char[] checkWord)
+    {
+        for (char sign: checkWord)
+        {
+            if(sign == '_')
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static void displayHint(ArrayList<String> arrayCapitalCountry)

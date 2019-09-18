@@ -21,7 +21,7 @@ public class HANGMAN
         {
             case 'S':
                 System.out.println("Heya! Nacisnąłeś start!");
-                initGame();
+                PLAY_GAME.initGame();
                 break;
             case 'H':
                 break;
@@ -34,16 +34,6 @@ public class HANGMAN
         return 1;
     }
 
-    public static void initGame()
-    {
-        ArrayList<String> countryAndCapital = new ArrayList<String>();
-        int INDEX_OF_CAPITAL = 1;
-        Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
-        countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file));
-        char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
-        
-
-    }
 
     public static long startTime()
     {
