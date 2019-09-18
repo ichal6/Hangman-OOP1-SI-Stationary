@@ -48,8 +48,4 @@ public class HANGMAN
         return timeTotal;
     }
 
-    public static void displayUser()
-    {
-        ;
-    }
 }

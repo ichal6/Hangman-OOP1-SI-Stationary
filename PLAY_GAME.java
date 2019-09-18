@@ -10,10 +10,6 @@ public class PLAY_GAME
         
         String capital = "łobuz";
         char[] dashed = PREPARE_TO_GAME.makeDashWord(capital);
-        play_game(capital, dashed);
-        System.out.println(dashed);
-        play_game(capital, dashed);
-        System.out.println(dashed);
     }
 
     public static void initGame()
@@ -32,7 +28,7 @@ public class PLAY_GAME
         boolean gameWin = true;
         while (lifeCount > 0)
         {
-            play_game(countryAndCapital.get(INDEX_OF_CAPITAL),capitalDash);
+            play_game(countryAndCapital, capitalDash);
             if (gameWin)
             {
                 //gameWinScreen();
@@ -42,10 +38,12 @@ public class PLAY_GAME
         //gameLoseScreen();
     }
 
-    public static boolean play_game(String capital, char[] dashedWord)
+    public static boolean play_game(ArrayList<String> countryAndCapital, char[] dashedWord)
     {
         boolean foundLetter = false;
         boolean foundWord = false;
+        String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
+        displayUser(countryAndCapital, dashedWord, lifeCount);
         System.out.print("Please insert word or leter: ");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
         String letterOrWord = inputUser.nextLine();  // Read user input
@@ -86,5 +84,15 @@ public class PLAY_GAME
     {
         System.out.print("It's the capital of: ");
         System.out.println(arrayCapitalCountry.get(0));
+    }
+
+    public static void displayUser(ArrayList<String> arrayCapitalCountry, char[] dashedWord, int lifeCount)
+    {
+        String dashedString = new String(dashedWord);
+        System.out.println("Capital - " + dashedString + "\tlife - " + lifeCount);
+        if (lifeCount == 1)
+        {
+            displayHint(arrayCapitalCountry);
+        }
     }
 }
