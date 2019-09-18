@@ -9,6 +9,7 @@ public class PREPARE_TO_GAME
         ArrayList<ArrayList<String>> Array_countries_and_capitals = new ArrayList<ArrayList<String>>();
         Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
         System.out.println(randomCapitalsAndCountry(Array_countries_and_capitals = FILE_OPERATION.ScannertoArray(data_from_file)));
+        System.out.println(dashWord("Krówka"));
     }
 
     public static void prepareGame()
@@ -24,5 +25,18 @@ public class PREPARE_TO_GAME
         int index = rand.nextInt(lengthList);
         arrayRow = arrayCountriesAndCapitals.get(index);
         return arrayRow;
+    }
+
+    public static String dashWord(String capital)
+    {
+        int lengthWord = capital.length();
+        int iter = 0;
+        String capitalDash = "";
+        while (iter < lengthWord)
+        {
+            capitalDash = capitalDash.concat("_");
+            iter += 1;
+        }
+        return capitalDash;
     }
 }
