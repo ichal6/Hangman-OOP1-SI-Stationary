@@ -15,12 +15,12 @@ public class HANGMAN
     public static int mainMenu()
     {
         System.out.println("Welcome to Hangman! Save the world from SKYNET!");
+        System.out.println("(S)tart\n(H)igh scores\n(E)xit");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
         char choose_user = inputUser.next().charAt(0);  // Read user input
         switch(choose_user)
         {
             case 'S':
-                System.out.println("Heya! Nacisnąłeś start!");
                 PLAY_GAME.initGame();
                 mainMenu();
                 break;
