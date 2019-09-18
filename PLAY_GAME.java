@@ -74,6 +74,7 @@ public class PLAY_GAME
         {
             lifeCount -= 1;
             notInWord.add(letterOrWord);
+            guessingCount += 1;
         }
 
         if(foundWord)
@@ -82,6 +83,7 @@ public class PLAY_GAME
         }
         else
         {
+            lifeCount -= 1;
             return false;
         }
 
