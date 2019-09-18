@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class PLAY_GAME 
 {
     public static void main(String[] args) 
     {
+        
         String capital = "łobuz";
         char[] dashed = PREPARE_TO_GAME.dashWord(capital);
         play_game(capital, dashed);
@@ -31,5 +33,11 @@ public class PLAY_GAME
             System.out.println(foundLetter);
         }
         //inputUser.close();
+    }
+
+    public static void displayHint(ArrayList<String> arrayCapitalCountry)
+    {
+        System.out.print("It's the capital of: ");
+        System.out.println(arrayCapitalCountry.get(0));
     }
 }
