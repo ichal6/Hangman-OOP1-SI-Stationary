@@ -3,8 +3,11 @@ import java.util.ArrayList;
 
 public class PLAY_GAME 
 {
+    static final int INDEX_OF_COUNTRY = 0;
     static final int INDEX_OF_CAPITAL = 1;
     static int lifeCount = 10;
+    static ArrayList<String> notInWord = new ArrayList<String>();
+
     public static void main(String[] args) 
     {
         
@@ -62,8 +65,9 @@ public class PLAY_GAME
         if(foundLetter == false)
         {
             lifeCount -= 1;
+            notInWord.add(letterOrWord);
         }
-        
+
         if(foundWord)
         {
             return true;
@@ -91,13 +95,18 @@ public class PLAY_GAME
     public static void displayHint(ArrayList<String> arrayCapitalCountry)
     {
         System.out.print("It's the capital of: ");
-        System.out.println(arrayCapitalCountry.get(0));
+        System.out.println(arrayCapitalCountry.get(INDEX_OF_COUNTRY));
     }
 
     public static void displayUser(ArrayList<String> arrayCapitalCountry, char[] dashedWord, int lifeCount)
     {
         String dashedString = new String(dashedWord);
-        System.out.println("Capital - " + dashedString + "\tlife - " + lifeCount);
+        System.out.print("Wrong word:");
+        for(String notIn: notInWord)
+        {
+            System.out.print(" " + notIn);
+        }
+        System.out.println("\nCapital - " + dashedString + "\tlife - " + lifeCount);
         if (lifeCount == 1)
         {
             displayHint(arrayCapitalCountry);
