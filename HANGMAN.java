@@ -41,8 +41,20 @@ public class HANGMAN
         Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
         countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file));
         char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
-        System.out.println(capitalDash);
-        System.out.println(countryAndCapital);
+        
+
+    }
+
+    public static long startTime()
+    {
+        long timeStart = System.nanoTime();
+        return timeStart;
+    }
+
+    public static long StopTime(long timeStart)
+    {
+        long timeTotal = (System.nanoTime() - timeStart)/1_000_000_000;
+        return timeTotal;
     }
 
     public static void displayUser()
