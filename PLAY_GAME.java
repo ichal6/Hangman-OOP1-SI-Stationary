@@ -11,6 +11,7 @@ public class PLAY_GAME
     static final int INDEX_OF_CAPITAL = 1;
     static final int INDEX_OF_GUESSING_COUNT = 3;
     static int lifeCount = 10;
+    static int indexOfDraw = 0;
     static long timeBegin;
     static int guessingCount = 0; 
     static Set<String> notInWord = new HashSet<String>();
@@ -82,6 +83,9 @@ public class PLAY_GAME
 
     public static boolean play_game(ArrayList<String> countryAndCapital, char[] dashedWord)
     {
+        ArrayList<String> draws = new ArrayList<String>();
+        Scanner drawFile = FILE_OPERATION.open_file("draws.txt");
+        draws = FILE_OPERATION.draw(drawFile);
         boolean foundLetter = false;
         boolean foundWord = false;
         String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
@@ -98,6 +102,7 @@ public class PLAY_GAME
             if (!foundWord)
             {
                 lifeCount -= 1;
+                indexOfDraw++;
             }
             else
             {
@@ -124,9 +129,12 @@ public class PLAY_GAME
             }
             else
             {
-                
+                System.out.println(draws.get(indexOfDraw));
                 lifeCount -= 1;
+                indexOfDraw++;
                 notInWord.add(letterOrWord);
+
+                
             }
             
             guessingCount += 1;
