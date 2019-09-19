@@ -24,6 +24,7 @@ public class PLAY_GAME
     public static void initGame()
     {
         lifeCount = 10;
+        notInWord.clear();
         ArrayList<String> countryAndCapital = new ArrayList<String>();
         ArrayList<ArrayList<String>> listWin = new ArrayList<ArrayList<String>>();
         
