@@ -80,6 +80,7 @@ public class PLAY_GAME
         boolean foundLetter = false;
         boolean foundWord = false;
         String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
+        capital = capital.toUpperCase();
         displayUser(countryAndCapital, dashedWord, lifeCount);
         System.out.print("Please insert word or leter: ");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
@@ -103,6 +104,10 @@ public class PLAY_GAME
             foundLetter = FIND_LETTER.checkLetterInText(capital, letterOrWord);
             dashedWord = FIND_LETTER.checkLetterInText(capital, dashedWord, letterOrWord);
             foundWord = hasWord(dashedWord);
+            if (foundWord)
+            {
+                return true;
+            }
         }
 
 
