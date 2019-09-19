@@ -54,7 +54,8 @@ public class PLAY_GAME
                 newScoreUser.add(stringGuessingCount);
                 newScoreUser.add(stringTimeEnd);
                 newScoreUser.add(capital);
-                newHighScore(listWin, newScoreUser);
+                listWin = newHighScore(listWin, newScoreUser);
+                FILE_OPERATION.saveToFile(FILE_OPERATION.arrayToString(listWin), "win_list.txt");
                 gameWinScreen(timeEnd, guessingCount);
                 break;
             }

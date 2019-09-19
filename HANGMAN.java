@@ -23,9 +23,10 @@ public class HANGMAN
             case 'S':
                 PLAY_GAME.initGame();
                 mainMenu();
-                break;
             case 'H':
-                break;
+                Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
+                System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
+                mainMenu();
             case 'E':
                 break;
             default:
