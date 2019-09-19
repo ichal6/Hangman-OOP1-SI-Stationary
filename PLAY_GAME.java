@@ -60,12 +60,16 @@ public class PLAY_GAME
                 listWin = newHighScore(listWin, newScoreUser);
                 FILE_OPERATION.saveToFile(FILE_OPERATION.arrayToString(listWin), "win_list.txt");
                 gameWinScreen(timeEnd, guessingCount);
+                Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
+                System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
                 break;
             }
             
         }
         if (!gameWin)
         {
+            Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
+            System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
             gameLoseScreen();
         }
         
@@ -163,7 +167,7 @@ public class PLAY_GAME
         {
             listWin.set(theWorstGuessingCount, newTheBestUser);
         }
-        System.out.println(listWin);
+        
         return listWin;
 
     }
