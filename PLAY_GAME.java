@@ -8,7 +8,7 @@ public class PLAY_GAME
 {
     static final int INDEX_OF_COUNTRY = 0;
     static final int INDEX_OF_CAPITAL = 1;
-    static final int INDEX_OF_GUESSING_COUNT = 2;
+    static final int INDEX_OF_GUESSING_COUNT = 3;
     static int lifeCount = 10;
     static long timeBegin;
     static int guessingCount = 0; 
@@ -54,8 +54,8 @@ public class PLAY_GAME
                 ArrayList<String> newScoreUser = new ArrayList<String>();
                 newScoreUser.add(name);
                 newScoreUser.add(date);
-                newScoreUser.add(stringGuessingCount);
                 newScoreUser.add(stringTimeEnd);
+                newScoreUser.add(stringGuessingCount);
                 newScoreUser.add(capital);
                 listWin = newHighScore(listWin, newScoreUser);
                 FILE_OPERATION.saveToFile(FILE_OPERATION.arrayToString(listWin), "win_list.txt");
@@ -160,19 +160,24 @@ public class PLAY_GAME
     public static ArrayList<ArrayList<String>> newHighScore(ArrayList<ArrayList<String>> listWin, ArrayList <String> newTheBestUser)
     {
         int countGessing = Integer.parseInt(newTheBestUser.get(INDEX_OF_GUESSING_COUNT));
-        ArrayList <String> theWorstResult = new ArrayList <String>();
-        int theWorstGuessingCount;
-        int indexTheWorstResult = listWin.size() - 1;
-        theWorstResult = listWin.get(indexTheWorstResult);
-        theWorstGuessingCount = Integer.parseInt(theWorstResult.get(INDEX_OF_GUESSING_COUNT));
-        if (listWin.size() < 10)
+        int checkCount;
+        int index = 0;
+
+        for (ArrayList<String> row: listWin)
         {
-            listWin.add(newTheBestUser);
+            checkCount = Integer.parseInt(row.get(INDEX_OF_GUESSING_COUNT));
+            if (countGessing < checkCount)
+            {
+                listWin.add(index, newTheBestUser);
+                break;
+            }
+            index++;
         }
-        else if (countGessing > theWorstGuessingCount)
+        if (listWin.size() > 10)
         {
-            listWin.set(theWorstGuessingCount, newTheBestUser);
+            listWin.remove(10); //remove excess element
         }
+
         
         return listWin;
 
