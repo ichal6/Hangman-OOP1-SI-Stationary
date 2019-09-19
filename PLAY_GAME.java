@@ -115,15 +115,16 @@ public class PLAY_GAME
         {
             if (notInWord.contains(letterOrWord))
             {
-                guessingCount += 1; 
+                
             }
             else
             {
+                
                 lifeCount -= 1;
                 notInWord.add(letterOrWord);
             }
             
-            
+            guessingCount += 1;
         }
 
         return false;
