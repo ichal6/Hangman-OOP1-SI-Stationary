@@ -4,20 +4,16 @@ public class HANGMAN
 {
     public static void main(String[] args) 
     {
+        System.out.println("Welcome to Hangman! Save the world from SKYNET!");
         mainMenu();
-    }
-
-    public static void play_game()
-    {
-        FILE_OPERATION.open_file("countries_and_capitals.txt");
     }
 
     public static int mainMenu()
     {
-        System.out.println("Welcome to Hangman! Save the world from SKYNET!");
         System.out.println("(S)tart\n(H)igh scores\n(E)xit");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
         char choose_user = inputUser.next().charAt(0);  // Read user input
+        choose_user = Character.toUpperCase(choose_user);
         switch(choose_user)
         {
             case 'S':

@@ -55,6 +55,7 @@ public class FILE_OPERATION
         {
             ArrayList<String> Array_row = new ArrayList<String>();
             new_row = data_from_file.nextLine();
+            new_row = new_row.toUpperCase();
             String[] parts = new_row.split("\\|");
             if(listWin)
             {

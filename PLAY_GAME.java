@@ -79,6 +79,7 @@ public class PLAY_GAME
         System.out.print("Please insert word or leter: ");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
         String letterOrWord = inputUser.nextLine();  // Read user input
+        letterOrWord = letterOrWord.toUpperCase();
         if (letterOrWord.length() > 2)
         {
             foundWord = FIND_LETTER.checkWordInText(capital, letterOrWord);
