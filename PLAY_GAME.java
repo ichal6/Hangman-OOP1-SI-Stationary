@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Calendar;
 
 public class PLAY_GAME 
 {
@@ -46,8 +47,11 @@ public class PLAY_GAME
             gameWin = play_game(countryAndCapital, capitalDash);
             if (gameWin)
             {
-                String name = "Jan";
-                String date = "2019-09-19";
+                Calendar c = Calendar.getInstance();
+                System.out.print("Please insert your name: ");
+                Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
+                String name = inputUser.nextLine();  // Read user input
+                String date = String.valueOf(c.getTime());
                 String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
                 long timeEnd = stopTime(timeBegin);
                 String stringTimeEnd = String.valueOf(timeEnd);
