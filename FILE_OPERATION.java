@@ -8,8 +8,8 @@ public class FILE_OPERATION
     public static void main(String[] args) 
     {
         
-        Scanner data_from_file = open_file("countries_and_capitals.txt");
-        ScannertoArray(data_from_file, false);
+        Scanner data_from_file = open_file("win_list.txt");
+        ScannertoArray(data_from_file, true);
         
     }
 
@@ -54,9 +54,8 @@ public class FILE_OPERATION
                 capitals = parts[1].substring(1, parts[1].length()); //remove first char
                 Array_row.add(country);
                 Array_row.add(capitals);
-                Array_countries_and_capitals.add(Array_row);
             }
-            
+            Array_countries_and_capitals.add(Array_row);
            
         }
         System.out.println(Array_countries_and_capitals);
