@@ -2,3 +2,4 @@ Michał | 2018-09-09 | 45 | 2 | Pragha
 Kamil | 2018-09-19 | 30 | 5 | Warsaw
 Jan | 2019-09-19 | 9 | 27 | Asmara
 Jan | 2019-09-19 | 18 | 25 | Valletta
+Jan | 2019-09-19 | 5 | 27 | Helsinki

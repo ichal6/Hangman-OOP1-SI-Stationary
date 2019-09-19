@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class PLAY_GAME 
 {
@@ -10,7 +12,7 @@ public class PLAY_GAME
     static int lifeCount = 10;
     static long timeBegin;
     static int guessingCount = 0; 
-    static ArrayList<String> notInWord = new ArrayList<String>();
+    static Set<String> notInWord = new HashSet<String>();
 
     public static void main(String[] args) 
     {
@@ -100,9 +102,17 @@ public class PLAY_GAME
 
         if(foundLetter == false)
         {
-            lifeCount -= 1;
-            notInWord.add(letterOrWord);
-            guessingCount += 1;
+            if (notInWord.contains(letterOrWord))
+            {
+                guessingCount += 1; 
+            }
+            else
+            {
+                lifeCount -= 1;
+                notInWord.add(letterOrWord);
+            }
+            
+            
         }
 
         return false;
