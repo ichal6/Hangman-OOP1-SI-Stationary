@@ -77,4 +77,15 @@ public class FILE_OPERATION
         System.out.println(Array_countries_and_capitals);
         return Array_countries_and_capitals;
     }
+
+    public static String arrayToString(ArrayList<ArrayList<String>> listWin)
+    {
+        String formatData = "";
+        for(ArrayList<String> user: listWin)
+        {
+            formatData += String.format("%s | %s | %s | %s | %s\n", user.get(0), user.get(1), user.get(2), user.get(3), user.get(4));
+        }
+        System.out.print(formatData);
+        return formatData;
+    }
 }
