@@ -9,7 +9,7 @@ public class FILE_OPERATION
     public static void main(String[] args) 
     {
         
-        saveToFile("Hello Learner !! Welcome to howtodoinjava.com." ,"file.txt");
+        System.out.print(draw(open_file("draws.txt")));
         
     }
 
@@ -74,7 +74,6 @@ public class FILE_OPERATION
             Array_countries_and_capitals.add(Array_row);
            
         }
-        System.out.println(Array_countries_and_capitals);
         return Array_countries_and_capitals;
     }
 
@@ -85,7 +84,26 @@ public class FILE_OPERATION
         {
             formatData += String.format("%s | %s | %s | %s | %s\n", user.get(0), user.get(1), user.get(2), user.get(3), user.get(4));
         }
-        System.out.print(formatData);
         return formatData;
+    }
+
+    public static ArrayList <String> draw(Scanner dataFromFile)
+    {
+        ArrayList<String> arrayDraw = new ArrayList<String>();
+        String newRow = "";
+        String newDraw = "";
+        while(dataFromFile.hasNextLine()) 
+        {
+            newRow = dataFromFile.nextLine();
+            if(newRow.equals("?"))
+            {
+                arrayDraw.add(newDraw);
+                newRow = "";
+                newDraw = "";
+            }
+            newDraw += newRow + "\n";
+           
+        }
+        return arrayDraw;
     }
 }
