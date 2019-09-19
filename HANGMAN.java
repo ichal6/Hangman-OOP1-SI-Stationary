@@ -10,13 +10,13 @@ public class HANGMAN
 
     public static void mainMenu()
     {
-        System.out.println("(S)tart\n(H)igh scores\n(E)xit");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
-        char choose_user = inputUser.next().charAt(0);  // Read user input
-        choose_user = Character.toUpperCase(choose_user);
         boolean isRun = true;
         while (isRun)
         {
+            System.out.println("(S)tart\n(H)igh scores\n(E)xit");
+            char choose_user = inputUser.next().charAt(0);  // Read user input
+            choose_user = Character.toUpperCase(choose_user);
             switch(choose_user)
             {
                 case 'S':
