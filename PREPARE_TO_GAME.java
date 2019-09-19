@@ -26,11 +26,19 @@ public class PREPARE_TO_GAME
         int lengthWord = capital.length();
         int iter = 0;
         String capitalDash = "";
-        while (iter < lengthWord)
+        for(char sign : capital.toCharArray())
         {
-            capitalDash = capitalDash.concat("_");
-            iter += 1;
+            if(sign == ' ')
+            {
+                capitalDash = capitalDash.concat(" ");
+            }
+            else
+            {
+                capitalDash = capitalDash.concat("_");
+            }
+            
         }
+        
         char[] capitalDashArray = capitalDash.toCharArray();
 
         return capitalDashArray;
