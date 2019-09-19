@@ -27,7 +27,6 @@ public class FILE_OPERATION
             e.printStackTrace();
             System.exit(0);
         }
-
         return data;
     }
 
@@ -41,13 +40,14 @@ public class FILE_OPERATION
             ArrayList<String> Array_row = new ArrayList<String>();
             new_row = data_from_file.nextLine();
             String[] parts = new_row.split("\\|");
-            country = parts[0].split(" ")[0];
-            capitals = parts[1].split(" ")[1];
+            country = parts[0].substring(0, parts[0].length() - 1); //remove last char
+            capitals = parts[1].substring(1, parts[1].length()); //remove first char
             Array_row.add(country);
             Array_row.add(capitals);
             Array_countries_and_capitals.add(Array_row);
            
         }
+        System.out.println(Array_countries_and_capitals);
         return Array_countries_and_capitals;
     }
 }
