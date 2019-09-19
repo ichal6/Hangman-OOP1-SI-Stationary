@@ -23,7 +23,7 @@ public class PLAY_GAME
         ArrayList<String> countryAndCapital = new ArrayList<String>();
         
         Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
-        countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file));
+        countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file, false));
         char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
         startGame(countryAndCapital, capitalDash);
     }

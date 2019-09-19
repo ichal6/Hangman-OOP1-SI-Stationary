@@ -6,9 +6,8 @@ public class PREPARE_TO_GAME
 {
     public static void main(String[] args) 
     {
-        ArrayList<ArrayList<String>> Array_countries_and_capitals = new ArrayList<ArrayList<String>>();
         Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
-        System.out.println(randomCapitalsAndCountry(Array_countries_and_capitals = FILE_OPERATION.ScannertoArray(data_from_file)));
+        System.out.println(randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file, false)));
         
     }
 
