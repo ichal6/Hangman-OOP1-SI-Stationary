@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FILE_OPERATION 
@@ -8,8 +9,7 @@ public class FILE_OPERATION
     public static void main(String[] args) 
     {
         
-        Scanner data_from_file = open_file("win_list.txt");
-        ScannertoArray(data_from_file, true);
+        saveToFile("Hello Learner !! Welcome to howtodoinjava.com." ,"file.txt");
         
     }
 
@@ -28,6 +28,22 @@ public class FILE_OPERATION
             System.exit(0);
         }
         return data;
+    }
+
+    public static void saveToFile(String dataToSave, String filename)
+    {
+        try
+        {
+            FileWriter fileWriter = new FileWriter(filename);
+            fileWriter.write(dataToSave);
+            fileWriter.close();
+        }
+        catch ( IOException e) 
+        {
+            System.out.println("Sorry but I was unable to save your data file");
+            e.printStackTrace();
+            System.exit(0);
+        }
     }
 
     public static ArrayList<ArrayList<String>> ScannertoArray(Scanner data_from_file, boolean listWin)
