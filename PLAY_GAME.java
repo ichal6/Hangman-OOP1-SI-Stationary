@@ -23,6 +23,7 @@ public class PLAY_GAME
 
     public static void initGame()
     {
+        clearScreen();
         lifeCount = 10;
         notInWord.clear();
         ArrayList<String> countryAndCapital = new ArrayList<String>();
@@ -215,4 +216,9 @@ public class PLAY_GAME
     {
         System.out.println("I\'m so sorry, but you died... Try in next life." );
     }
+
+    public static void clearScreen() {  
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();  
+    }  
 }
