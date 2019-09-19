@@ -1,10 +1,12 @@
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PLAY_GAME 
 {
     static final int INDEX_OF_COUNTRY = 0;
     static final int INDEX_OF_CAPITAL = 1;
+    static final int INDEX_OF_GUESSING_COUNT = 2;
     static int lifeCount = 10;
     static long timeBegin;
     static int guessingCount = 0; 
@@ -21,14 +23,17 @@ public class PLAY_GAME
     {
         lifeCount = 10;
         ArrayList<String> countryAndCapital = new ArrayList<String>();
+        ArrayList<ArrayList<String>> listWin = new ArrayList<ArrayList<String>>();
         
         Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
         countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file, false));
         char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
-        startGame(countryAndCapital, capitalDash);
+        Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");
+        listWin = FILE_OPERATION.ScannertoArray(dataFromListWin, true);
+        startGame(countryAndCapital, capitalDash, listWin);
     }
 
-    public static void startGame(ArrayList<String> countryAndCapital ,char[] capitalDash)
+    public static void startGame(ArrayList<String> countryAndCapital, char[] capitalDash, ArrayList<ArrayList <String>> listWin)
     {
         timeBegin = startTime();
         boolean gameWin = true;
@@ -37,7 +42,19 @@ public class PLAY_GAME
             gameWin = play_game(countryAndCapital, capitalDash);
             if (gameWin)
             {
+                String name = "Jan";
+                String date = "2019-09-19";
+                String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
                 long timeEnd = stopTime(timeBegin);
+                String stringTimeEnd = String.valueOf(timeEnd);
+                String stringGuessingCount = String.valueOf(guessingCount);
+                ArrayList<String> newScoreUser = new ArrayList<String>();
+                newScoreUser.add(name);
+                newScoreUser.add(date);
+                newScoreUser.add(stringGuessingCount);
+                newScoreUser.add(stringTimeEnd);
+                newScoreUser.add(capital);
+                newHighScore(listWin, newScoreUser);
                 gameWinScreen(timeEnd, guessingCount);
                 break;
             }
@@ -115,6 +132,27 @@ public class PLAY_GAME
     {
         long timeTotal = (System.nanoTime() - timeStart)/1_000_000_000;
         return timeTotal;
+    }
+
+    public static ArrayList<ArrayList<String>> newHighScore(ArrayList<ArrayList<String>> listWin, ArrayList <String> newTheBestUser)
+    {
+        int countGessing = Integer.parseInt(newTheBestUser.get(INDEX_OF_GUESSING_COUNT));
+        ArrayList <String> theWorstResult = new ArrayList <String>();
+        int theWorstGuessingCount;
+        int indexTheWorstResult = listWin.size() - 1;
+        theWorstResult = listWin.get(indexTheWorstResult);
+        theWorstGuessingCount = Integer.parseInt(theWorstResult.get(INDEX_OF_GUESSING_COUNT));
+        if (listWin.size() < 10)
+        {
+            listWin.add(newTheBestUser);
+        }
+        else if (countGessing > theWorstGuessingCount)
+        {
+            listWin.set(theWorstGuessingCount, newTheBestUser);
+        }
+        System.out.println(listWin);
+        return listWin;
+
     }
 
     public static void displayHint(ArrayList<String> arrayCapitalCountry)
