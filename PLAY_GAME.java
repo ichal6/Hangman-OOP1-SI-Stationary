@@ -133,6 +133,9 @@ public class PLAY_GAME
             foundLetter = FIND_LETTER.checkLetterInText(capital, letterOrWord);
             dashedWord = FIND_LETTER.checkLetterInText(capital, dashedWord, letterOrWord);
             foundWord = hasWord(dashedWord);
+
+            clearScreen();
+            
             if (foundWord)
             {
                 return true;
@@ -147,6 +150,10 @@ public class PLAY_GAME
                 displayDraw(draws);
                 lifeCount -= 1;
                 notInWord.add(letterOrWord);
+            }
+            else
+            {
+                clearScreen();
             }
             guessingCount += 1;
         }
