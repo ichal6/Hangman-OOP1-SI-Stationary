@@ -25,6 +25,7 @@ public class PLAY_GAME
         clearScreen();
         notInWord.clear();
         lifeCount = 10;
+        indexOfDraw = 0;
         
         ArrayList<String> countryAndCapital = new ArrayList<String>();
         ArrayList<ArrayList<String>> listCountrysAndCapitals = new ArrayList<ArrayList<String>>();
@@ -75,13 +76,18 @@ public class PLAY_GAME
     {
         timeBegin = startTime();
         boolean gameWin = true;
-        while (lifeCount > 0)
+        boolean isRun = true;
+        while (isRun)
         {
             gameWin = play_game(countryAndCapital, capitalDash);
             if (gameWin)
             {
                 winGame(countryAndCapital, listWin);
-                break;
+                isRun = false;
+            }
+            if (lifeCount <= 0)
+            {
+                isRun = false;
             }
             
         }
