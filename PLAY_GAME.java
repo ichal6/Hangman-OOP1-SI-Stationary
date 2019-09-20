@@ -144,9 +144,8 @@ public class PLAY_GAME
         {
             if (!(notInWord.contains(letterOrWord)))
             {
-                System.out.println(draws.get(indexOfDraw));
+                displayDraw(draws);
                 lifeCount -= 1;
-                indexOfDraw++;
                 notInWord.add(letterOrWord);
             }
             guessingCount += 1;
@@ -274,5 +273,12 @@ public class PLAY_GAME
         clearScreen();
         Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
         System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
+    }
+
+    public static void displayDraw(ArrayList<String> draws)
+    {
+        clearScreen();
+        System.out.println(draws.get(indexOfDraw));
+        indexOfDraw++;
     }
 }
