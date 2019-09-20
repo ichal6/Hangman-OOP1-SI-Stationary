@@ -45,24 +45,30 @@ public class PLAY_GAME
 
     public static void winGame(ArrayList<String> countryAndCapital, ArrayList<ArrayList <String>> listWin)
     {
-        Calendar c = Calendar.getInstance();
+        long timeEnd = stopTime(timeBegin);
+        gameWinScreen(timeEnd, guessingCount);
+
         System.out.print("Please insert your name: ");
         Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
         String name = inputUser.nextLine();  // Read user input
+
+        Calendar c = Calendar.getInstance();
         String date = String.valueOf(c.getTime());
-        String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
-        long timeEnd = stopTime(timeBegin);
         String stringTimeEnd = String.valueOf(timeEnd);
         String stringGuessingCount = String.valueOf(guessingCount);
+        String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
+
         ArrayList<String> newScoreUser = new ArrayList<String>();
         newScoreUser.add(name);
         newScoreUser.add(date);
         newScoreUser.add(stringTimeEnd);
         newScoreUser.add(stringGuessingCount);
         newScoreUser.add(capital);
+
         listWin = newHighScore(listWin, newScoreUser);
         FILE_OPERATION.saveToFile(FILE_OPERATION.arrayToString(listWin), "win_list.txt");
-        gameWinScreen(timeEnd, guessingCount);
+
+        
         Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
         System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
     }
