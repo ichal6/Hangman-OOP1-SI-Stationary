@@ -9,8 +9,6 @@ public class FILE_OPERATION
     public static void main(String[] args) 
     {
         
-        System.out.print(draw(open_file("draws.txt")));
-        
     }
 
     public static Scanner open_file(String filename)
