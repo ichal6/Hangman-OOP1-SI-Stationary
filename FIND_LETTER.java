@@ -21,6 +21,10 @@ public class FIND_LETTER
     {
         char[] capital_array = capital.toCharArray();
         int index = 0;
+        if (letterOrWord.length() <= 0)
+        {
+            return capitalDash;
+        }
         for (char charInCapital: capital_array)
         {
             if (charInCapital == letterOrWord.charAt(0))
@@ -35,6 +39,10 @@ public class FIND_LETTER
     public static boolean checkLetterInText(String capital, String letterOrWord)
     {
         char[] capital_array = capital.toCharArray();
+        if (letterOrWord.length() <= 0)
+        {
+            return false;
+        }
         for (char charInCapital: capital_array)
         {
             if (charInCapital == letterOrWord.charAt(0))
