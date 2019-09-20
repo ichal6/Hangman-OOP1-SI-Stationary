@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Calendar;
@@ -19,24 +18,53 @@ public class PLAY_GAME
     public static void main(String[] args) 
     {
         
-        String capital = "łobuz";
-        char[] dashed = PREPARE_TO_GAME.makeDashWord(capital);
     }
 
     public static void initGame()
     {
         clearScreen();
-        lifeCount = 10;
         notInWord.clear();
-        ArrayList<String> countryAndCapital = new ArrayList<String>();
-        ArrayList<ArrayList<String>> listWin = new ArrayList<ArrayList<String>>();
+        lifeCount = 10;
         
-        Scanner data_from_file = FILE_OPERATION.open_file("countries_and_capitals.txt");
-        countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(FILE_OPERATION.ScannertoArray(data_from_file, false));
-        char[] capitalDash = PREPARE_TO_GAME.makeDashWord(countryAndCapital.get(INDEX_OF_CAPITAL));
+        ArrayList<String> countryAndCapital = new ArrayList<String>();
+        ArrayList<ArrayList<String>> listCountrysAndCapitals = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> listWin = new ArrayList<ArrayList<String>>();
+        String capital = "";
+        
+        Scanner dataFromFile = FILE_OPERATION.open_file("countries_and_capitals.txt");
+        listCountrysAndCapitals = FILE_OPERATION.ScannertoArray(dataFromFile, false);
+        countryAndCapital = PREPARE_TO_GAME.randomCapitalsAndCountry(listCountrysAndCapitals);
+        capital = countryAndCapital.get(INDEX_OF_CAPITAL);
+        char[] capitalDash = PREPARE_TO_GAME.makeDashWord(capital);
+
         Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");
         listWin = FILE_OPERATION.ScannertoArray(dataFromListWin, true);
+
         startGame(countryAndCapital, capitalDash, listWin);
+    }
+
+    public static void winGame(ArrayList<String> countryAndCapital, ArrayList<ArrayList <String>> listWin)
+    {
+        Calendar c = Calendar.getInstance();
+        System.out.print("Please insert your name: ");
+        Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
+        String name = inputUser.nextLine();  // Read user input
+        String date = String.valueOf(c.getTime());
+        String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
+        long timeEnd = stopTime(timeBegin);
+        String stringTimeEnd = String.valueOf(timeEnd);
+        String stringGuessingCount = String.valueOf(guessingCount);
+        ArrayList<String> newScoreUser = new ArrayList<String>();
+        newScoreUser.add(name);
+        newScoreUser.add(date);
+        newScoreUser.add(stringTimeEnd);
+        newScoreUser.add(stringGuessingCount);
+        newScoreUser.add(capital);
+        listWin = newHighScore(listWin, newScoreUser);
+        FILE_OPERATION.saveToFile(FILE_OPERATION.arrayToString(listWin), "win_list.txt");
+        gameWinScreen(timeEnd, guessingCount);
+        Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
+        System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
     }
 
     public static void startGame(ArrayList<String> countryAndCapital, char[] capitalDash, ArrayList<ArrayList <String>> listWin)
@@ -48,26 +76,7 @@ public class PLAY_GAME
             gameWin = play_game(countryAndCapital, capitalDash);
             if (gameWin)
             {
-                Calendar c = Calendar.getInstance();
-                System.out.print("Please insert your name: ");
-                Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
-                String name = inputUser.nextLine();  // Read user input
-                String date = String.valueOf(c.getTime());
-                String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
-                long timeEnd = stopTime(timeBegin);
-                String stringTimeEnd = String.valueOf(timeEnd);
-                String stringGuessingCount = String.valueOf(guessingCount);
-                ArrayList<String> newScoreUser = new ArrayList<String>();
-                newScoreUser.add(name);
-                newScoreUser.add(date);
-                newScoreUser.add(stringTimeEnd);
-                newScoreUser.add(stringGuessingCount);
-                newScoreUser.add(capital);
-                listWin = newHighScore(listWin, newScoreUser);
-                FILE_OPERATION.saveToFile(FILE_OPERATION.arrayToString(listWin), "win_list.txt");
-                gameWinScreen(timeEnd, guessingCount);
-                Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
-                System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
+                winGame(countryAndCapital, listWin);
                 break;
             }
             
