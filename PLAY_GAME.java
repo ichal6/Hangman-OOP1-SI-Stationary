@@ -68,9 +68,7 @@ public class PLAY_GAME
         listWin = newHighScore(listWin, newScoreUser);
         FILE_OPERATION.saveToFile(FILE_OPERATION.arrayToString(listWin), "win_list.txt");
 
-        
-        Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
-        System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
+        displayHighscores();
     }
 
     public static void startGame(ArrayList<String> countryAndCapital, char[] capitalDash, ArrayList<ArrayList <String>> listWin)
@@ -247,5 +245,11 @@ public class PLAY_GAME
     public static void clearScreen() {  
         System.out.print("\033[H\033[2J");  
         System.out.flush();  
-    }  
+    }
+    
+    public static void displayHighscores()
+    {
+        Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
+        System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
+    }
 }
