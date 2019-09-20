@@ -52,9 +52,7 @@ public class PLAY_GAME
         long timeEnd = stopTime(timeBegin);
         gameWinScreen(timeEnd, guessingCount);
 
-        System.out.print("Please insert your name: ");
-        Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
-        String name = inputUser.nextLine();  // Read user input
+        String name = insertName();
 
         Calendar c = Calendar.getInstance();
         String date = String.valueOf(c.getTime());
@@ -215,6 +213,14 @@ public class PLAY_GAME
         letterOrWord = letterOrWord.toUpperCase();
 
         return letterOrWord;
+    }
+
+    public static String insertName()
+    {
+        System.out.print("Please insert your name: ");
+        Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
+        String name = inputUser.nextLine();  // Read user input
+        return name;
     }
 
     public static ArrayList<String> drawToArray()
