@@ -31,6 +31,9 @@ public class PLAY_GAME
         ArrayList<ArrayList<String>> listCountrysAndCapitals = new ArrayList<ArrayList<String>>();
         ArrayList<ArrayList<String>> listWin = new ArrayList<ArrayList<String>>();
         String capital = "";
+
+        ArrayList<String> draws = new ArrayList<String>();
+        draws = drawToArray();
         
         Scanner dataFromFile = FILE_OPERATION.open_file("countries_and_capitals.txt");
         listCountrysAndCapitals = FILE_OPERATION.ScannertoArray(dataFromFile, false);
@@ -41,7 +44,7 @@ public class PLAY_GAME
         Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");
         listWin = FILE_OPERATION.ScannertoArray(dataFromListWin, true);
 
-        startGame(countryAndCapital, capitalDash, listWin);
+        startGame(countryAndCapital, capitalDash, listWin, draws);
     }
 
     public static void winGame(ArrayList<String> countryAndCapital, ArrayList<ArrayList <String>> listWin)
@@ -72,14 +75,14 @@ public class PLAY_GAME
         displayHighscores();
     }
 
-    public static void startGame(ArrayList<String> countryAndCapital, char[] capitalDash, ArrayList<ArrayList <String>> listWin)
+    public static void startGame(ArrayList<String> countryAndCapital, char[] capitalDash, ArrayList<ArrayList <String>> listWin, ArrayList<String> draws)
     {
         timeBegin = startTime();
         boolean gameWin = true;
         boolean isRun = true;
         while (isRun)
         {
-            gameWin = play_game(countryAndCapital, capitalDash);
+            gameWin = play_game(countryAndCapital, capitalDash, draws);
             if (gameWin)
             {
                 winGame(countryAndCapital, listWin);
@@ -93,27 +96,26 @@ public class PLAY_GAME
         }
         if (!gameWin)
         {
-            Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
-            System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
+            displayHighscores();
             gameLoseScreen();
         }
         
     }
 
-    public static boolean play_game(ArrayList<String> countryAndCapital, char[] dashedWord)
+    public static boolean play_game(ArrayList<String> countryAndCapital, char[] dashedWord, ArrayList<String> draws)
     {
-        ArrayList<String> draws = new ArrayList<String>();
-        Scanner drawFile = FILE_OPERATION.open_file("draws.txt");
-        draws = FILE_OPERATION.draw(drawFile);
         boolean foundLetter = false;
         boolean foundWord = false;
+
+        String letterOrWord;
+
         String capital = countryAndCapital.get(INDEX_OF_CAPITAL);
         capital = capital.toUpperCase();
+
         displayUser(countryAndCapital, dashedWord, lifeCount);
-        System.out.print("Please insert word or leter: ");
-        Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
-        String letterOrWord = inputUser.nextLine();  // Read user input
-        letterOrWord = letterOrWord.toUpperCase();
+
+        letterOrWord = insertLetterOrWord();
+
         if (letterOrWord.length() > 2)
         {
             foundWord = FIND_LETTER.checkWordInText(capital, letterOrWord);
@@ -142,26 +144,17 @@ public class PLAY_GAME
 
         if(foundLetter == false)
         {
-            if (notInWord.contains(letterOrWord))
-            {
-                
-            }
-            else
+            if (!(notInWord.contains(letterOrWord)))
             {
                 System.out.println(draws.get(indexOfDraw));
                 lifeCount -= 1;
                 indexOfDraw++;
                 notInWord.add(letterOrWord);
-
-                
             }
-            
             guessingCount += 1;
         }
 
         return false;
-
-
         //inputUser.close();
     }
 
@@ -214,6 +207,23 @@ public class PLAY_GAME
         return listWin;
 
     }
+    public static String insertLetterOrWord()
+    {
+        System.out.print("Please insert word or leter: ");
+        Scanner inputUser = new Scanner(System.in);  // Create a Scanner object
+        String letterOrWord = inputUser.nextLine();  // Read user input
+        letterOrWord = letterOrWord.toUpperCase();
+
+        return letterOrWord;
+    }
+
+    public static ArrayList<String> drawToArray()
+    {
+        Scanner drawFile = FILE_OPERATION.open_file("draws.txt");
+        ArrayList<String> draws = new ArrayList<String>();
+        draws = FILE_OPERATION.draw(drawFile);
+        return draws;
+    }
 
     public static void displayHint(ArrayList<String> arrayCapitalCountry)
     {
@@ -255,6 +265,7 @@ public class PLAY_GAME
     
     public static void displayHighscores()
     {
+        clearScreen();
         Scanner dataFromListWin = FILE_OPERATION.open_file("win_list.txt");  
         System.out.print(FILE_OPERATION.arrayToString(FILE_OPERATION.ScannertoArray(dataFromListWin, true)));
     }
