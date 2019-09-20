@@ -2,7 +2,7 @@ public class FIND_LETTER
 {
     public static void main(String[] args) 
     {
-        ;
+    
     }
 
     public static boolean checkWordInText(String capital, String letterOrWord)
